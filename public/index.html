@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChatMe!</title>
+  <link rel="stylesheet" type ="text/css" href ="styles/style.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <script src="https://use.fontawesome.com/14f721c5f4.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="header-elem" id="title">ChatMe!<i class="fa fa-comments header-elem" aria-hidden="true"></i></h1>
+      <div class ="user-info">
+        <div class="header-elem" id="user-pic"></div>
+        <div class="header-elem" id="user-name"></div>
+      </div>
+      <div class="login-container header-elem">
+        <button class="authbtn" id="anon-sign-in">
+          Sign-in as Guest
+        </button>
+        <button class="authbtn" id="sign-in">
+          Sign-in with Google
+        </button>
+        <button class="authbtn" id="sign-out">
+          Sign-out
+        </button>
+      </div>
+    </div>
+    <div class="message-container">
+      <div id="results"></div>
+      <br/>
+    </div>
+    <div class="input-container">
+      <input id="text" type="text" placeholder="Message">
+      <button class="button" id="post">Post</button>
+    </div>
+  </div>
+  <!--Scripts start here-->
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script type="text/javascript" src="scripts/main.js"></script>
+</body>
+</html>

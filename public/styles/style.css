@@ -1,0 +1,83 @@
+.container {
+  margin: auto;
+  height: auto;
+  width: 70%;
+  padding: 10px;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.header {
+  width: 100%;
+}
+
+.header-elem {
+  display: inline-block;
+  text-align: center;
+}
+
+.user-info {
+  width: 33%;
+  float: left;
+  padding-top: 30px;
+  padding-right: 5px;
+}
+
+#title {
+  width: 33%;
+}
+
+.login-container {
+  width: 30%;
+  padding-top: 30px;
+  float: right;
+}
+
+.authbtn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px;
+  margin: 1px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  float: right;
+}
+
+#results {
+  height: 450px;
+}
+
+.msg {
+  background-color: #caccc7;
+  margin-top: 1em;
+  padding: 1em;
+}
+
+.input-container {
+  margin-top: 10px;
+  width: auto;
+}
+
+.input-container input {
+  display: inline-block;
+}
+
+#post {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    float: right;
+    width: 25%;
+    height: 35px;
+}
+
+#text {
+  height: 30px;
+  width: 70%;
+}
