@@ -78,7 +78,7 @@ auth.onAuthStateChanged(function(user) {
     googlename.innerHTML = displayName;
     googlepic.innerHTML = "<img src=" + photoURL +" height='40px' width='40px'>";
     googlename.style.visibility = "visible";
-    googlepic.style.display = 'visible';
+    googlepic.style.visibility = "visible";
     signInButton.style.display = 'none';
     anonSignInButton.style.display = 'none';
     signOutButton.style.display = 'inline';
