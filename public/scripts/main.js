@@ -9,11 +9,12 @@ var config = {
 };
 firebase.initializeApp(config);
 
-//Creates firebase database and auth references
+// Retrieves Firebase database, auth, and messaging objects
 var database = firebase.database().ref();
 var auth = firebase.auth();
+var messaging = firebase.messaging();
 
-//DOM element selector variables
+// DOM element selector variables
 var textInput = document.querySelector('#text');
 var postButton = document.querySelector('#post');
 var picButton = document.querySelector('#pic');
@@ -24,10 +25,34 @@ var googlename = document.querySelector('#user-name');
 var googlepic = document.querySelector("#user-pic");
 var messageBox = document.getElementById("results");
 
+// POSTS
+// Function to add a data listener for new messages and populate message section
+var startListening = function() {
+  database.on('child_added', function(snapshot) {
+    var msg = snapshot.val();
+    var msgUsernameElement = document.createElement("b");
+    var msgTextElement = document.createElement("p");
+    var msgElement = document.createElement("div");
+    msgUsernameElement.textContent = msg.username;
+    msgTextElement.textContent = msg.text;
+    msgElement.appendChild(msgUsernameElement);
+    msgElement.appendChild(msgTextElement);
+    msgElement.className = "msg";
+
+    var msgList = messageBox.children;
+    if (msgList.length <= 3) {
+      messageBox.appendChild(msgElement);
+    } else {
+      messageBox.removeChild(msgList[0]);
+      messageBox.appendChild(msgElement);
+    }
+  });
+}
+
 // AUTH FUNCTIONS
 // Checks if user is signed in and populates DOM accordingly
 auth.onAuthStateChanged(function(user) {
-  if (user && !user.isAnonymous) { // User is signed in!
+  if (user && !user.isAnonymous) { // User is signed in non-anonymously
     var displayName = user.displayName;
     var email = user.email;
     var emailVerified = user.emailVerified;
@@ -42,7 +67,9 @@ auth.onAuthStateChanged(function(user) {
     anonSignInButton.style.display = 'none';
     signInButton.style.display = 'none';
     signOutButton.style.display = 'inline';
-  } else if (user && user.isAnonymous) {
+    // Begin listening for data
+    startListening();
+  } else if (user && user.isAnonymous) { // User is signed in non-anonymously
     var displayName = "Guest";
     var photoURL = "#guesphotohere";
     var isAnonymous = user.isAnonymous;
@@ -54,7 +81,9 @@ auth.onAuthStateChanged(function(user) {
     signInButton.style.display = 'none';
     anonSignInButton.style.display = 'none';
     signOutButton.style.display = 'inline';
-  } else {
+    // Begin listening for data
+    startListening();
+  } else { // User is not signed in
     googlename.style.visibility = "hidden";
     googlepic.style.visibility = "hidden";
     signInButton.style.display = 'inline';
@@ -101,7 +130,33 @@ var checkSignedIn = function() {
   }
 }
 
-//EVENT LISTENERS
+// Pushes new messages to database
+var postMsg = function() {
+  if (textInput.value && checkSignedIn()){ //Checks for google auth
+    var currentUser = auth.currentUser;
+    if (auth.currentUser.isAnonymous){ //Checks for anon auth
+      var displayName = "Guest";
+    } else {
+      var displayName = currentUser.displayName;
+    }
+    var msgText = textInput.value;
+    database.push({username:displayName, text:msgText});
+    textInput.value = "";
+  };
+}
+
+// NOTIFICATIONS
+messaging.requestPermission()
+.then(function() {
+  console.log('Notification permission granted.');
+  // TODO(developer): Retrieve an Instance ID token for use with FCM.
+  // ...
+})
+.catch(function(err) {
+  console.log('Unable to get permission to notify.', err);
+});
+
+// EVENT LISTENERS
 anonSignInButton.addEventListener("click", function() {
   anonSignIn();
 });
@@ -115,42 +170,5 @@ signOutButton.addEventListener("click", function() {
 });
 
 postButton.addEventListener("click", function() {
-  if (auth.currentUser.isAnonymous){
-    var displayName = "Guest";
-  }
-  if (textInput.value && checkSignedIn()){ //Checks for google auth
-    var currentUser = auth.currentUser;
-    var displayName = currentUser.displayName;
-    var msgText = textInput.value;
-    database.push({username:displayName, text:msgText});
-    textInput.value = "";
-  };
+  postMsg();
 });
-
-//MESSAGING
-//Function to add a data listener for new messages and populate message section
-var startListening = function() {
-  database.on('child_added', function(snapshot) {
-    var msg = snapshot.val();
-    var msgUsernameElement = document.createElement("b");
-    var msgTextElement = document.createElement("p");
-    var msgElement = document.createElement("div");
-    msgUsernameElement.textContent = msg.username;
-    msgTextElement.textContent = msg.text;
-    msgElement.appendChild(msgUsernameElement);
-    msgElement.appendChild(msgTextElement);
-    msgElement.className = "msg";
-
-    var msgList = messageBox.children;
-
-    if (msgList.length <= 3) {
-      messageBox.appendChild(msgElement);
-    } else {
-      messageBox.removeChild(msgList[0]);
-      messageBox.appendChild(msgElement);
-    }
-  });
-}
-
-// Begin listening for data
-startListening();
