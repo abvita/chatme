@@ -11,10 +11,10 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1 class="header-elem" id="title">ChatMe!<i class="fa fa-comments header-elem" aria-hidden="true"></i></h1>
+      <div class="header-elem" id="title"><h1><span class="title-words">ChatMe!</span><i class="fa fa-comments header-elem" aria-hidden="true"></i></h1></div>
       <div class ="user-info">
         <div class="header-elem" id="user-pic"></div>
-        <div class="header-elem" id="user-name"></div>
+        <div class="header-elem title-words" id="user-name"></div>
       </div>
       <div class="logout-container header-elem">
         <button class="authbtn" id="sign-out">
@@ -35,7 +35,7 @@
       <br/>
     </div>
     <div class="input-container">
-      <input id="text" type="text" placeholder="Message..." maxlength="160">
+      <input id="text" type="text" placeholder="Message..." maxlength="80" onkeypress="enter(event)">
       <button class="button" id="post">SEND</button>
     </div>
   </div>

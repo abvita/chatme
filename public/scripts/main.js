@@ -161,3 +161,11 @@ signOutButton.addEventListener("click", function() {
 postButton.addEventListener("click", function() {
   postMsg();
 });
+
+// Press Enter to send message
+var enter = function(e) {
+        if(e.keyCode === 13){
+            e.preventDefault(); // Ensure it is only this code that rusn
+            postMsg();
+        }
+}
