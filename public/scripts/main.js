@@ -16,6 +16,7 @@ var auth = firebase.auth();
 //DOM element selector variables
 var textInput = document.querySelector('#text');
 var postButton = document.querySelector('#post');
+var picButton = document.querySelector('#pic');
 var anonSignInButton = document.querySelector("#anon-sign-in");
 var signInButton = document.querySelector("#sign-in");
 var signOutButton = document.querySelector("#sign-out");
