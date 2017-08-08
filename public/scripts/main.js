@@ -61,7 +61,7 @@ auth.onAuthStateChanged(function(user) {
     var uid = user.uid;
     var providerData = user.providerData;
     googlename.innerHTML = displayName;
-    googlepic.innerHTML = "<img src=" + photoURL +" height='30px' width='30px'>";
+    googlepic.innerHTML = "<img src=" + photoURL +" height='40px' width='40px'>";
     googlename.style.visibility = "visible";
     googlepic.style.visibility = "visible";
     anonSignInButton.style.display = 'none';
@@ -71,13 +71,14 @@ auth.onAuthStateChanged(function(user) {
     startListening();
   } else if (user && user.isAnonymous) { // User is signed in non-anonymously
     var displayName = "Guest";
-    var photoURL = "#guesphotohere";
+    var photoURL = "images/guest_pic.png";
     var isAnonymous = user.isAnonymous;
     var uid = user.uid;
     var providerData = user.providerData;
     googlename.innerHTML = displayName;
+    googlepic.innerHTML = "<img src=" + photoURL +" height='40px' width='40px'>";
     googlename.style.visibility = "visible";
-    googlepic.style.display = 'none';
+    googlepic.style.display = 'visible';
     signInButton.style.display = 'none';
     anonSignInButton.style.display = 'none';
     signOutButton.style.display = 'inline';

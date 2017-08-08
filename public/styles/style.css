@@ -23,13 +23,14 @@ html, body {
 
 .input-container {
   width: 100%;
-  display: inline-block;
+  display: block;
   height: 20%;
   text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .header-elem {
-  height: 20%;
   display: inline-block;
   text-align: center;
 }
@@ -37,7 +38,7 @@ html, body {
 .user-info {
   width: 33%;
   float: left;
-  padding-top: 40px;
+  padding-top: 30px;
   padding-right: 5px;
 }
 
@@ -141,23 +142,32 @@ html, body {
 
 @media screen and (max-width: 700px) and (min-width: 551px){
   #post{
-    font-size: 12px;
+    font-size: 1em;
   }
 }
 
 @media screen and (max-width: 550px) and (min-width: 0px){
+  .container {
+    width: 85%;
+  }
   .title-words{
     display: none;
   }
   #text{
-    width: 91%;
+    width: 89%;
   }
   #post {
     width: 100%;
     margin-top: 5px;
   }
-  .authbtn{
+  .authbtn {
     padding: 8px;
     margin-left: 20px;
+  }
+  .msg {
+    font-size: 1em;
+  }
+  .msg p {
+    font-size: .75em;
   }
 }
