@@ -166,7 +166,7 @@ postButton.addEventListener("click", function() {
 // Press Enter to send message
 var enter = function(e) {
         if(e.keyCode === 13){
-            e.preventDefault(); // Ensure it is only this code that rusn
+            e.preventDefault(); // Ensure it is only this code that runs
             postMsg();
         }
 }
